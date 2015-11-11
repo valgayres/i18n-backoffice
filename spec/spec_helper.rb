@@ -1,1 +1,1 @@
-require 'i18n/backoffice'
+require 'i18n-backoffice'

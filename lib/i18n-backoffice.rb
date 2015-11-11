@@ -1,4 +1,4 @@
-require 'i18n/backoffice/version.rb'
+require 'i18n-backoffice/version.rb'
 
 module I18n
   module Backoffice
