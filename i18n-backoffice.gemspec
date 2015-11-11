@@ -1,7 +1,7 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'i18n/backoffice/version'
+require 'i18n-backoffice/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'i18n-backoffice'
