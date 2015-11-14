@@ -40,7 +40,11 @@ module I18n
 
       def reload_translation_from_redis
         return unless redis
-        i18n_translations(true).deep_merge!(translations(true).dig_hashed_by_spliting_keys)
+        i18n_translations(true).deep_merge!(translations(true).dig_hashed_by_spliting_keys.slice(I18n.available_locales))
+      end
+
+      def store_translations_in_redis(translations_hash)
+        redis.hmset('I18n_translations', translations.merge(translations_hash))
       end
     })
   end
