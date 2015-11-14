@@ -1,6 +1,14 @@
 require 'active_support/core_ext/hash'
 
 class Hash
+  def get_locales!
+    slice!(I18n.available_locales)
+  end
+
+  def get_locales
+    slice(I18n.available_locales)
+  end
+
   def deep_flatten_by_stringification!(previous_keys = [])
     keys.each do |key|
       new_keys_list = previous_keys + [key]
