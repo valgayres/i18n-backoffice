@@ -7,7 +7,7 @@ module I18n
       end
 
       def last_update
-        @last_update.in_time_zone
+        @last_update && @last_update.in_time_zone
       end
 
       def redis=(redis)
