@@ -13,7 +13,6 @@ module I18n
       def redis=(redis)
         raise "Warning during initialization, #{redis} is not a Redis instance" unless redis.class == Redis
         @redis = redis
-        @last_update = Time.zone.now
       end
 
       def last_update=(last_update)

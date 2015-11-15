@@ -44,7 +44,7 @@ module I18n
 
       def update_translation_if_needed
         return unless redis
-        reload_translation_from_redis if last_update_in_redis > config.last_update
+        reload_translation_from_redis if config.last_update.nil? || last_update_in_redis > config.last_update
       end
 
       def reload_translation_from_redis
