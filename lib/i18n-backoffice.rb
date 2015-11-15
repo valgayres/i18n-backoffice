@@ -38,14 +38,34 @@ module I18n
         I18n.backend.load_translations
       end
 
+      def last_update_in_redis
+        Time.zone.parse(redis.get('I18n_translation_updated_at'))
+      end
+
+      def update_translation_if_needed
+        return unless redis
+        reload_translation_from_redis if last_update_in_redis > config.last_update
+      end
+
       def reload_translation_from_redis
         return unless redis
         i18n_translations(true).deep_merge!(translations(true).dig_hashed_by_spliting_keys.get_locales)
+        config.last_update = Time.zone.now
       end
 
       def store_translations_in_redis(translations_hash)
-        redis.hmset('I18n_translations', translations.merge(translations_hash.get_locales.deep_flatten_by_stringification))
+        redis.mapped_hmset('I18n_translations', translations.merge(translations_hash.get_locales.deep_flatten_by_stringification))
+        redis.set('I18n_translation_updated_at', Time.zone.now)
       end
+
+      def translate(*args)
+        update_translation_if_needed
+        I18n.translate(args)
+      end
+
+      alias :t :translate
+
     })
+
   end
 end

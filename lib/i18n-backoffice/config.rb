@@ -6,9 +6,18 @@ module I18n
         @redis
       end
 
+      def last_update
+        @last_update.in_time_zone
+      end
+
       def redis=(redis)
         raise "Warning during initialization, #{redis} is not a Redis instance" unless redis.class == Redis
         @redis = redis
+        @last_update = Time.zone.now
+      end
+
+      def last_update=(last_update)
+        @last_update = last_update
       end
     end
   end

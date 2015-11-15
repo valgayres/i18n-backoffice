@@ -2,11 +2,11 @@ require 'active_support/core_ext/hash'
 
 class Hash
   def get_locales!
-    slice!(I18n.available_locales)
+    slice!(*I18n.available_locales)
   end
 
   def get_locales
-    slice(I18n.available_locales)
+    slice(*I18n.available_locales)
   end
 
   def deep_flatten_by_stringification!(previous_keys = [])
@@ -38,6 +38,7 @@ class Hash
   def dig_hashed_by_spliting_keys!
     keys.each do |key|
       next if key.class == Symbol
+      next if key.empty?
       value = delete(key)
       key_list = key.split('.')
       if key_list.length == 1
@@ -53,6 +54,7 @@ class Hash
     result = {}
     each do |key, value|
       result[key] = value if key.class == Symbol
+      next if key.empty?
       key_list = key.split('.')
       if key_list.length == 1
         result.deep_merge!(key_list[0].to_sym => value)
