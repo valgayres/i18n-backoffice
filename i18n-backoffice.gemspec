@@ -23,4 +23,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'redis'
   spec.add_dependency 'i18n'
   spec.add_dependency 'activesupport', '>= 4.0'
+  spec.add_dependency 'sinatra', '~> 1.4', '>= 1.4.6'
+  spec.add_dependency 'rails', '~> 4', '>= 3.2.0'
 end

@@ -2,6 +2,7 @@ require 'i18n-backoffice/version.rb'
 require 'i18n'
 require 'redis'
 require 'i18n-backoffice/hash'
+require 'i18n-backoffice/web'
 
 module I18n
   module Backoffice
