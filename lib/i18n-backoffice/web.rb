@@ -2,7 +2,7 @@
 
 require 'erb'
 require 'sinatra/base'
-
+require 'i18n-backoffice/helpers'
 
 module I18n
   module Backoffice
