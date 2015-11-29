@@ -22,7 +22,7 @@ module I18n
       end
 
       get "/translations/:locale" do
-        @initial_translations = I18n::Backoffice.initial_translations(true).
+        @initial_translations = I18n::Backoffice.initial_translations.
             deep_flatten_by_stringification.
             select {|k,_v| k.match(/\A#{params[:locale]}/)}
         @custom_translations  = I18n::Backoffice.translations
