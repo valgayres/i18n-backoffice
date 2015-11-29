@@ -32,7 +32,7 @@ module I18n
       get "/save_translations" do
         I18n::Backoffice.redis.mapped_hmset('I18n_translations', I18n::Backoffice.translations.merge(params[:translations].select{|_k,v| v.present?}))
         I18n::Backoffice.redis.set('I18n_translation_updated_at', Time.now)
-        redirect "translations/#{params[:locale]}"
+        redirect "#{root_path}translations/#{params[:locale]}"
       end
     end
   end

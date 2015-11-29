@@ -10,6 +10,10 @@ module I18n
           </tr>
         ROW
       end
+
+      def root_path
+        "#{env['SCRIPT_NAME']}/"
+      end
     end
   end
 end
