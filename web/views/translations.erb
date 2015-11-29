@@ -1,9 +1,8 @@
-<table>
-
-<% @translations.each do |key, translation| %>
-    <tr>
-        <td><%= key         %></td>
-        <td><%= translation %></td>
-    </tr>
-<% end %>
-</table>
+<form action="save_translations">
+    <table>
+        <% @initial_translations.each do |key, initial_translation| %>
+            <%= translation_input(key, initial_translation, @custom_translations[:key])%>
+        <% end %>
+    </table>
+    <button>Save</button>
+</form>

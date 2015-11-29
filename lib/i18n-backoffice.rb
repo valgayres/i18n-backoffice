@@ -35,6 +35,11 @@ module I18n
         @i18n_translations ||= I18n.backend.send(:translations)
       end
 
+      def initial_translations(load = false)
+        return if @initial_translations && load
+        @initial_translations ||= I18n.backend.send(:translations)
+      end
+
       def reinitialize_translations
         I18n.backend.load_translations
       end
@@ -48,6 +53,7 @@ module I18n
       end
 
       def reload_translation_from_redis
+        initial_translations(true)
         i18n_translations(true).deep_merge!(translations(true).dig_hashed_by_spliting_keys.get_locales) if last_update_in_redis > config.last_update
         config.last_update = Time.now
       end
