@@ -22,8 +22,9 @@ module I18n
       end
 
       get "/translations/:locale" do
-        render status: 404 and return unless params[:locale].in? I18n.available_locales
-        @initial_translations = I18n::Backoffice.initial_translations.select {|k,_v| k.match(/\A#{params[:locale]}/)}
+        @initial_translations = I18n::Backoffice.initial_translations.
+            select {|k,_v| k.match(/\A#{params[:locale]}/)}.
+            deep_flatten_by_stringification
         @custom_translations  = I18n::Backoffice.translations
 
         erb :translations

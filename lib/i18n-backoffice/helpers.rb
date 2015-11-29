@@ -6,7 +6,7 @@ module I18n
           <tr>
             <td>#{key}</td>
             <td>#{initial_translation}</td>
-            <td><input name=translations[#{key}>#{custom_translation}]</td>
+            <td><input name=translations[#{key}]>#{custom_translation}</td>
           </tr>
         ROW
       end
