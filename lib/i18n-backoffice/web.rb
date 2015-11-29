@@ -22,18 +22,17 @@ module I18n
       end
 
       get "/translations/:locale" do
-        @initial_translations = I18n::Backoffice.initial_translations.
+        @initial_translations = I18n::Backoffice.initial_translations(true).
             deep_flatten_by_stringification.
             select {|k,_v| k.match(/\A#{params[:locale]}/)}
         @custom_translations  = I18n::Backoffice.translations
-
         erb :translations
       end
 
-      post "/translations/save_translations" do
-
-        redis.mapped_hmset('I18n_translations', translations.merge(params[:translations].select{|_k,v| v.present?}))
-        redis.set('I18n_translation_updated_at', Time.now)
+      get "/save_translations" do
+        I18n::Backoffice.redis.mapped_hmset('I18n_translations', I18n::Backoffice.translations.merge(params[:translations].select{|_k,v| v.present?}))
+        I18n::Backoffice.redis.set('I18n_translation_updated_at', Time.now)
+        redirect "/translations/#{params[:locale]}"
       end
     end
   end

@@ -1,4 +1,9 @@
-<form action="save_translations">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+
+<form action="../save_translations" method="get" id="save_translations">
+    <input hidden="hidden" name="locale" val="<%=params[:locale] %>">
     <table>
         <% @initial_translations.each do |key, initial_translation| %>
             <%= translation_input(key, initial_translation, @custom_translations[key])%>
@@ -6,3 +11,11 @@
     </table>
     <button>Save</button>
 </form>
+
+<script type="application/javascript">
+    $(document).ready(function(){
+        $('#save_translations').submit(function(){
+            $(":text[value='']").prop('disabled', true)
+        })
+    })
+</script>
